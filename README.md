@@ -1,5 +1,7 @@
 # Stress Detection using Machine Learning
 
+One-page summary: open `poster.html` in a browser.
+
 ## About the Dataset
 
 This project uses a **synthetic dataset** created from training GANs on the original WESAD dataset. The synthetic data has:
@@ -115,5 +117,5 @@ The stress detection models achieved **high accuracy with consistent results acr
 ## How to Run
 
 1. Install required libraries as per notebooks (`scikit-learn`, `xgboost`, `lightgbm`, `pandas`, `numpy`, `matplotlib`, `seaborn`).
-2. Run `Stress_detection_EDA.ipynb` for full data analysis and preprocessing.
-3. Run `Stress_detection_model.ipynb` for model training and evaluation.
+2. `Stress_detection_model.ipynb` reads `dataset.csv` in this folder (480,052 rows; columns BVP, EDA, ACC_x, ACC_y, ACC_z, TEMP, Label). That file is the preprocessed subset from the Drive link in the notebook.
+3. `Stress_detection_EDA.ipynb` still reads the larger Colab file `10000_subj_synthetic_DGAN.csv`, which is not in this folder. Its saved plots are already in the notebook.
