@@ -8,7 +8,9 @@
 :root { --ink:#1c1915; --muted:#5c564c; --line:#d9d1c3; --paper:#f6f1e7; --card:#fffdf8; --accent:#5C4A3A; }
 * { box-sizing:border-box; }
 body { margin:0; background:#e7e1d6; color:var(--ink); font-family:Georgia, "Iowan Old Style", serif; }
-.sheet { max-width:1100px; margin:28px auto; background:var(--paper); border:1px solid var(--line); }
+.sheet { max-width:1180px; margin:28px auto; background:var(--paper); border:1px solid var(--line); }
+.band { display:grid; grid-template-columns:1.25fr 1fr 0.9fr; border-top:1px solid var(--line); }
+.band section { padding-bottom:18px; }
 header { display:flex; justify-content:space-between; gap:24px; padding:28px 32px 18px; border-bottom:3px solid var(--accent); }
 h1 { font-size:34px; line-height:1.05; margin:0 0 8px; letter-spacing:-0.4px; }
 .claim { margin:0; font-family:"Segoe UI", sans-serif; font-size:16px; color:var(--muted); max-width:680px; }
@@ -26,7 +28,7 @@ ul { margin:0; padding-left:18px; }
 .stat span { font-family:"Segoe UI", sans-serif; font-size:12px; color:var(--muted); }
 footer { display:flex; justify-content:space-between; gap:20px; padding:16px 32px 22px; border-top:1px solid var(--line); font-family:"Segoe UI", sans-serif; font-size:14px; }
 code { font-family:Consolas, monospace; background:var(--card); border:1px solid var(--line); padding:2px 6px; }
-@media (max-width:800px) { .grid { grid-template-columns:1fr; } section { border-right:0; border-bottom:1px solid var(--line); } header, footer { display:block; } .tags { text-align:left; margin-top:12px; } }
+@media (max-width:800px) { .grid, .band { grid-template-columns:1fr; } section { border-right:0; border-bottom:1px solid var(--line); } header, footer { display:block; } .tags { text-align:left; margin-top:12px; } }
 </style>
 </head>
 <body>
@@ -44,8 +46,13 @@ code { font-family:Consolas, monospace; background:var(--card); border:1px solid
     <section><h2>Method</h2><ul><li>The same cleaned table goes to logistic regression, random forest, XGBoost, and LightGBM.</li><li>F1 and ROC-AUC, not accuracy alone, because the decision has a cost.</li></ul></section>
     <section><h2>Evidence</h2><div class="stat"><b>~98%</b><span>forest, XGBoost, and LightGBM</span></div><div class="stat"><b>~93%</b><span>logistic regression</span></div><div class="stat"><b>3</b><span>models within one point</span></div></section>
   </div>
+  <div class="band">
+    <section><h2>What the result actually says</h2><ul><li>Logistic regression is about 93%. Random forest is about 98.2%, LightGBM about 98.3%, XGBoost about 98.4%.</li><li>F1 for the tree models stays above 0.98. The ROC curves are in the notebook, so the ranking is visible without retraining.</li><li>The three ensembles are within a point of each other. LightGBM or random forest is the practical choice because they train faster.</li></ul></section>
+    <section><h2>What it does not show</h2><ul><li>The physiological table this was trained on is local. It is not in the GitHub repo, so a fresh machine cannot rerun training from the clone alone.</li><li>Accuracy this high on one sensor table does not say the same model would hold on a different device or a different labeling protocol.</li></ul></section>
+    <section><h2>Beside the other attempts</h2><ul><li>The linear model is the one that falls behind. Adding another boosting library does not move the result.</li></ul></section>
+  </div>
   <footer>
-    <div><h2>What came out of it</h2><ul><li>LightGBM or random forest is the practical choice. The accuracy does not justify a heavier model.</li><li>The notebook keeps the figures. The training table is local and is not part of the GitHub repo.</li></ul></div>
+    <div><h2>Stack</h2><p>scikit-learn, Random Forest, XGBoost, LightGBM. The notebook is the artifact. Figures are already executed in the file.</p></div>
     <div><h2>Look at it</h2><p>Open the notebook and read the saved outputs.</p></div>
   </footer>
 </article>
